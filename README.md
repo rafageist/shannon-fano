@@ -1,4 +1,4 @@
-# Implementation of Shannon-Fano encoding algorithm (university project)
+# Implementation of Shannon-Fano encoding algorithm
 
 In the field of data compression, Shannon–Fano coding, named after Claude Shannon 
 and Robert Fano, is a name given to two different but related techniques for constructing 
