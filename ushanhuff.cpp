@@ -1,10 +1,8 @@
-/************************************************************************************************
-                                T E L E I N F O R M A T I C A
-                         Programa para codificar segun Shannon - Fano
-                               por Rafael Rodriguez Ramirez
-                                  Ingenieria Informitica
-                                 15 de septiembre del 2007
-************************************************************************************************/
+/**
+ * Programa para codificar segun Shannon - Fano
+ * 15 de septiembre del 2007
+ * @author Rafa Rodriguez <rafageist@hotmail.com>
+ */
 
 #pragma hdrstop
 #pragma argsused
@@ -32,7 +30,7 @@
                 // si Sk = R entonces D = = |Sk - R| = 0 y es optima
                 // si Sk > R entonces
                    // sea P el pivote dado por Ak  y se sabe que el corte es en P
-                   // Pero a�n queda hallar a cual de los dos conjuntos pertenece P
+                   // Pero aun queda hallar a cual de los dos conjuntos pertenece P
                    // existen 2 diferencias que es necesario comparar
                    // D1 = |Sk - R |
                    // D2 = |(Sk - P) - (R + P)|
