@@ -1,13 +1,12 @@
 # Shannon-Fano coding
 
-This repository preserves a historical Borland C++ implementation of Shannon-Fano coding and adds a modern, portable C++17 version that can be compiled with GCC, Clang, MinGW, or MSVC.
+This repository contains a modern, portable C++17 implementation of Shannon-Fano coding that can be compiled with GCC, Clang, MinGW, or MSVC.
 
-The goal is educational: the old implementation remains available as a study artifact, while the modern implementation shows the same algorithm with standard C++, clearer data structures, and no platform-specific console dependencies.
+The project started as a Borland C++ exercise written in 2007. That original implementation is intentionally not kept in the active source tree; Git history preserves it. The current tree focuses on a small, standard, cross-platform version suitable for learning and experimentation.
 
 ## Files
 
-- `ushanhuff.cpp` — original Borland-era implementation from 2007.
-- `src/shannon_fano.cpp` — modern portable C++17 implementation.
+- `src/shannon_fano.cpp` — portable C++17 implementation.
 - `CMakeLists.txt` — optional CMake build file.
 
 ## Build with GCC or MinGW
