@@ -1,28 +1,94 @@
-# Implementation of Shannon-Fano encoding algorithm
+# Shannon-Fano coding
 
-In the field of data compression, Shannon–Fano coding, named after Claude Shannon 
-and Robert Fano, is a name given to two different but related techniques for constructing 
-a prefix code based on a set of symbols and their probabilities (estimated or measured).
+This repository contains a modern, portable C++17 implementation of Shannon-Fano coding that can be compiled with GCC, Clang, MinGW, or MSVC.
 
-Shannon's method chooses a prefix code where a source symbol i {\displaystyle i} i is given 
-the codeword length l i = ⌈ − log 2 ⁡ p i ⌉ {\displaystyle l_{i}=\lceil -\log _{2}p_{i}\rceil } 
-{\displaystyle l_{i}=\lceil -\log _{2}p_{i}\rceil }. 
+The project started as a Borland C++ exercise written in 2007. The last version containing the original Borland source can be preserved with a Git tag or GitHub release before merging this modernization branch. The current tree focuses on a small, standard, cross-platform version suitable for learning and experimentation.
 
-One common way of choosing the codewords uses the binary expansion of the cumulative probabilities. 
-This method was proposed in Shannon's "A Mathematical Theory of Communication" (1948), his article 
-introducing the field of information theory.
+## Files
 
-Fano's method divides the source symbols into two sets ("0" and "1") with probabilities 
-as close to 1/2 as possible. Then those sets are themselves divided in two, and so on, 
-until each set contains only one symbol. The codeword for that symbol is the string of "0"s 
-and "1"s that records which half of the divides it fell on. This method was proposed in a 
-later technical report by Fano (1949).
+- `src/shannon_fano.cpp` — portable C++17 implementation.
+- `CMakeLists.txt` — optional CMake build file.
 
-Shannon–Fano codes are suboptimal in the sense that they do not always achieve the lowest 
-possible expected codeword length, as Huffman coding does.[1] However, Shannon–Fano codes 
-have an expected codeword length within 1 bit of optimal. Fano's method usually produces 
-encoding with shorter expected lengths than Shannon's method. However, Shannon's method is 
-easier to analyse theoretically.
+## Build with GCC or MinGW
 
-Shannon–Fano coding should not be confused with Shannon–Fano–Elias coding (also known as Elias coding), 
-the precursor to arithmetic coding. 
+Linux/macOS:
+
+```bash
+g++ -std=c++17 -Wall -Wextra -pedantic src/shannon_fano.cpp -o shannon_fano
+./shannon_fano 0.4 0.3 0.2 0.1
+```
+
+Windows with MinGW:
+
+```bash
+g++ -std=c++17 -Wall -Wextra -pedantic src/shannon_fano.cpp -o shannon_fano.exe
+shannon_fano.exe 0.4 0.3 0.2 0.1
+```
+
+## Build with CMake
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+Run it after building:
+
+```bash
+./build/shannon_fano 0.4 0.3 0.2 0.1
+```
+
+On Windows, the executable location depends on the generator. With Visual Studio it is commonly under `build\Debug\shannon_fano.exe` or `build\Release\shannon_fano.exe`.
+
+## Usage
+
+Pass probabilities or weights as command-line arguments:
+
+```bash
+./shannon_fano 0.4 0.3 0.2 0.1
+```
+
+The program also works interactively if no arguments are provided:
+
+```bash
+./shannon_fano
+```
+
+Input values are normalized internally, so both of these are equivalent:
+
+```bash
+./shannon_fano 0.4 0.3 0.2 0.1
+./shannon_fano 4 3 2 1
+```
+
+Example output:
+
+```text
+Shannon-Fano coding
+-------------------
+Symbol     Probability        Code    Length
+S1            0.400000           1         1
+S2            0.300000          01         2
+S3            0.200000         001         3
+S4            0.100000         000         3
+
+Entropy:              1.846439 bits/symbol
+Expected code length: 1.900000 bits/symbol
+```
+
+## Algorithm note
+
+Fano's Shannon-Fano method sorts symbols by probability, splits them into two groups whose total probabilities are as close as possible, assigns one bit to each group, and repeats the same operation until each group contains a single symbol.
+
+This is useful for learning prefix coding and divide-and-conquer algorithms, but it is not always optimal. Huffman coding can produce shorter expected code lengths for some distributions.
+
+## Modernization points
+
+The modern version intentionally keeps the algorithm small and readable. The main changes from the original version are:
+
+- Standard C++ headers instead of Borland-specific headers such as `iostream.h` and `conio.h`.
+- No `clrscr`, `textcolor`, `cprintf`, or `getch`.
+- `std::vector` and `std::string` instead of manual `new[]` arrays.
+- Explicit pending intervals instead of indirect arrays of cuts and termination flags.
+- Half-open intervals `[begin, end)` to avoid ambiguous inclusive boundary handling.
+- Separate functions for input parsing, symbol preparation, splitting, encoding, and output.
