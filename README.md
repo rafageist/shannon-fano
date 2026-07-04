@@ -2,7 +2,7 @@
 
 This repository contains a modern, portable C++17 implementation of Shannon-Fano coding that can be compiled with GCC, Clang, MinGW, or MSVC.
 
-The project started as a Borland C++ exercise written in 2007. That original implementation is intentionally not kept in the active source tree; Git history preserves it. The current tree focuses on a small, standard, cross-platform version suitable for learning and experimentation.
+The project started as a Borland C++ exercise written in 2007. The last version containing the original Borland source can be preserved with a Git tag or GitHub release before merging this modernization branch. The current tree focuses on a small, standard, cross-platform version suitable for learning and experimentation.
 
 ## Files
 
