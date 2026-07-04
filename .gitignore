@@ -1,2 +1,6 @@
-*.exe
+build/
+shannon_fano
+shannon_fano.exe
+*.o
 *.obj
+*.exe
